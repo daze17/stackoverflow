@@ -2,14 +2,15 @@ import React from 'react'
 import { chakra, Box, Button, Flex, Heading, Stack, Text } from '@chakra-ui/react'
 import Routes from "@app/routes/routers";
 import Router, { useRouter } from "next/router";
+import moment from 'moment';
 
-const QuestionHeader = () => {
+const QuestionHeader = ({ data }: any) => {
+    console.log(data, 'data')
     return (
         <Box w={"100%"}>
             <Flex justifyContent={"space-between"}>
                 <Heading fontSize={"1.7rem"} fontWeight={"normal"} mb={"8px"}>
-                    Scala - How to create a class with a constructor that receives an object as parameter
-                </Heading >
+                    {data?.Users?.name} - {data?.title} </Heading >
                 <Button
                     display={{ base: "none", md: "inline-flex" }}
                     fontSize={"sm"}
@@ -17,7 +18,7 @@ const QuestionHeader = () => {
                     color={"#ffffff"}
                     bg={"#0a95ff"}
                     border={"1px solid #7aa7c7"}
-                    onClick={() => Router.push(Routes.Main.Home.route)}
+                    onClick={() => Router.push(Routes.Additional.QuestionAsk.route)}
                     _hover={{
                         bg: "#0074cc",
                     }}
@@ -30,20 +31,20 @@ const QuestionHeader = () => {
                     <chakra.span color="gray.500">
                         Asked
                     </chakra.span>
-                    {" "}today
+                    {" "}{moment(data?.createdAt).format('dddd')}
                 </Text>
 
                 <Text mr={"16px"}>
                     <chakra.span color="gray.500">
                         Modified
                     </chakra.span>
-                    {" "}today
+                    {" "}{moment(data?.createdAt).format('LT')}
                 </Text>
                 <Text mr={"16px"}>
                     <chakra.span color="gray.500">
                         Viewed
                     </chakra.span>
-                    {" "}7 times</Text>
+                    {" "}1 times</Text>
             </Flex>
         </Box>
     )

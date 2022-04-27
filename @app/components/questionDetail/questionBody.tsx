@@ -3,7 +3,7 @@ import { Box, Button, Flex, Stack, Text, IconButton, Icon } from '@chakra-ui/rea
 import { BiUpArrow, BiDownArrow, } from 'react-icons/bi'
 import { BsFillBookmarkStarFill } from 'react-icons/bs'
 
-const QuestionBody = () => {
+const   QuestionBody = ({ data }: any) => {
     return (
         <Box w={"100%"} >
             <Flex>
@@ -21,9 +21,7 @@ const QuestionBody = () => {
                     <Icon as={BsFillBookmarkStarFill} w={5} h={5} cursor="pointer" onClick={() => console.log('hi')} />
                 </Box>
                 <Box marginLeft={"5px"} h="500px" bg={"yellow"} w={"100%"}>
-                    I have an HDFS running with multiple datanodes on cloudera.
-
-                    Sometimes we get an error message in the overview which is:
+                    {data?.questionBody}
                 </Box>
             </Flex>
         </Box>

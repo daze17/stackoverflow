@@ -8,11 +8,11 @@ import { get, isEmpty } from "lodash";
 import { CreateApolloClient } from "@app/config/apollo";
 import { gql } from "apollo-boost";
 
-const parseCookies = ({ req }) => {
+const parseCookies = ({ req }: any) => {
   return cookie.parse(req ? req.headers.cookie || "" : document.cookie || "");
 };
 
-const redirect = (res, route) => {
+const redirect = (res: any, route: string) => {
   if (process.browser) {
     Router.push(route);
   } else {
@@ -21,13 +21,13 @@ const redirect = (res, route) => {
   }
 };
 
-const auth = async ({ ctx, route, req, res, apolloClient }) => {
+const auth = async ({ ctx, route, req, res, apolloClient }: any) => {
   const cookies = parseCookies({ req });
   const token = config.TOKEN_KEY;
   let user = {};
   const USER = process.browser ? Cookies.get(token) : cookies[token];
 
-  const getUser = async (apolloClient) => {
+  const getUser = async (apolloClient: any) => {
     let response = {};
     response = await apolloClient.query({
       fetchPolicy: "no-cache",
@@ -74,9 +74,6 @@ const auth = async ({ ctx, route, req, res, apolloClient }) => {
   }
   if (route === "/questions/ask") {
     redirect(res, Routes.Additional.Login.route);
-  }
-  if (route === "/_error" || route === "/404") {
-    invalidRouteRedirect();
   }
   return { user };
 };
