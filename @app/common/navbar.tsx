@@ -14,10 +14,13 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import Routes from "@app/routes/routers";
+import Router from "next/router";
+import { useUserContext } from "@app/config/userProvider";
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
-
+  const { user }: any = useUserContext()
   return (
     <Box>
       <Flex
@@ -60,7 +63,7 @@ export default function Navbar() {
             align={"center"}
           >
             <Button
-              onClick={() => console.log("afsd")}
+              onClick={() => Router.push(Routes.Main.Home.route)}
               bg={"none"}
               _hover={{ bg: "none" }}
               _active={{ bg: "none" }}
@@ -85,34 +88,43 @@ export default function Navbar() {
                 bg={"#fff"}
               />
             </Box>
-            <Button
-              display={{ base: "none", md: "inline-flex" }}
-              fontSize={"sm"}
-              fontWeight={600}
-              color={"#39739d"}
-              bg={"#e1ecf4"}
-              border={"1px solid #7aa7c7"}
-              href={"/login"}
-              _hover={{
-                bg: "#b3d3ea",
-              }}
-            >
-              Log In
-            </Button>
-            <Button
-              display={{ base: "none", md: "inline-flex" }}
-              fontSize={"sm"}
-              fontWeight={600}
-              color={"#ffffff"}
-              bg={"#0a95ff"}
-              border={"1px solid #7aa7c7"}
-              href={"#"}
-              _hover={{
-                bg: "#0074cc",
-              }}
-            >
-              Sign Up
-            </Button>
+            {!user?.id ? <>
+              <Button
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"sm"}
+                fontWeight={600}
+                color={"#39739d"}
+                bg={"#e1ecf4"}
+                border={"1px solid #7aa7c7"}
+                onClick={() => Router.push(Routes.Additional.Login.route)}
+                _hover={{
+                  bg: "#b3d3ea",
+                }}
+              >
+                Log In
+              </Button>
+              <Button
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"sm"}
+                fontWeight={600}
+                color={"#ffffff"}
+                bg={"#0a95ff"}
+                border={"1px solid #7aa7c7"}
+                onClick={() => Router.push(Routes.Additional.Register.route)}
+                _hover={{
+                  bg: "#0074cc",
+                }}
+              >
+                Sign Up
+              </Button>
+            </> : <>
+              <Button>
+                profile
+              </Button>
+              <Button>
+                logout
+              </Button>
+            </>}
           </Stack>
         </Flex>
       </Flex>
@@ -136,9 +148,8 @@ const DesktopNav = () => {
           fontWeight={500}
           color={linkColor}
           borderRadius={"1000px"}
-          // bg={"white"}
           m={"0"}
-          p={"6px 12px"}  
+          p={"6px 12px"}
           _hover={{
             bg: "#e3e6e8",
             textDecoration: "none",
@@ -200,14 +211,14 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: "About",
-    href: "/about",
+    // href: "/about",
   },
   {
     label: "Products",
-    href: "/products",
+    // href: "/products",
   },
   {
     label: "For Teams",
-    href: "/teams",
+    // href: "/teams",
   },
 ];

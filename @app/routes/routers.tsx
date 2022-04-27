@@ -3,7 +3,6 @@ import _ from "lodash";
 // interface 
 interface RouteProps {
   [index: string]: RoutePropsItems
-
 }
 interface RoutePropsItems {
   route: string;
@@ -29,26 +28,27 @@ const AdditionalRoutes: RouteProps = {
     fallback: "/",
     title: "About",
   },
-  UserList: {
+  Products: {
     route: "/products",
     fallback: "/",
     title: "Products",
   },
-  UserAdd: {
+  ForTeams: {
     route: "/forteams",
     fallback: "/",
     title: "For teams",
   },
-  BookList: {
+  Login: {
     route: "/login",
     fallback: "/",
     title: "Login",
   },
-  BookAdd: {
+  Register: {
     route: "/register",
     fallback: "/",
     title: "Register",
   },
+  QuestionAsk: { route: "/questions/ask", fallback: "/questions", title: "Ask a question" },
 };
 
 const MainRoutes: RouteProps = {
@@ -60,14 +60,14 @@ const MainRoutes: RouteProps = {
   Companies: { route: "/companies", fallback: "/", title: "Companies" },
 };
 
-const romuRoutes = [AdditionalRoutes, MainRoutes].reduce(
+const stackRoutes = [AdditionalRoutes, MainRoutes].reduce(
   (p: any, n: any) => [...p, ...getRoutes(n)],
   []
 );
 
 const Routes = {
   Main: MainRoutes,
-  Additainal: AdditionalRoutes,
+  Additional: AdditionalRoutes,
   get: (route: string, params: any) => {
     let _route = route;
     if (params) {
@@ -83,7 +83,7 @@ const Routes = {
     return _route;
   },
   getTitle: (route: string) => {
-    const _route = romuRoutes.find((r) => r.route === route);
+    const _route = stackRoutes.find((r) => r.route === route);
     if (_route) return _route.title;
     return "Stack overflow";
   },

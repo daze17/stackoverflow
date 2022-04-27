@@ -18,55 +18,32 @@ import {
 import Routes from "@app/routes/routers";
 import Router from "next/router";
 import { Formik, Form } from "formik";
-import { useMutation, useApolloClient } from "@apollo/react-hooks";
-// import { LOGIN } from "@app/components/login/utils/gql";
-import crypto from "crypto-js";
-import Cookies from "js-cookie";
-import config from "@app/config";
+import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-// import { showError, showSuccess } from "@app/config/errorHandler";
 
-const Login: NextPage = () => {
-  const apolloClient = useApolloClient();
-  const toast = useToast();
+const Register: NextPage = () => {
   // Mutations
-  const [loginMutation] = useMutation(gql`mutation LOGIN($input: LoginInput) {
-    login(input: $input){
-      accessToken
-    }
+  const [registerMutation] = useMutation(gql`mutation 
+  REGISTER($input: UserInput) {
+    addUser(input: $input)
   }`, {
     fetchPolicy: "no-cache",
-    onCompleted: async (data: any) => {
-      try {
-        Cookies.set(
-          config.TOKEN_KEY,
-          data?.login?.accessToken,
-          {
-            expires: 1,
-            httpOnly: false,
-            secure: false,
-            path: "/",
-          }
-        );
-
-        await apolloClient.cache.reset();
-        window.location.reload();
-      } catch (error) {
-        console.log(error);
-        // showError(Errors.System.INTERNAL_SERVER_ERROR);
-      }
+    onCompleted: async () => {
+      Router.push(Routes.Additional.Login.route);
+      // showSuccess("Registered successfully", toast);
     },
-    onError: (error) => console.log(error, 'login failed'),
+    onError: (error) => console.log(error, 'error'),
   });
 
   const onSubmit = (values: any) => {
-    localStorage.removeItem("credentials");
-    loginMutation({
+    console.log(values, "ayo bitches");
+    registerMutation({
       variables: {
         input: {
           email: values.email,
           password: values.password,
-        },
+          name: values.name,
+        }
       },
     });
   };
@@ -95,6 +72,14 @@ const Login: NextPage = () => {
             {({ handleChange, handleBlur }: any) => (
               <Form>
                 <Box bg="white" p="30px">
+                  <FormControl id="name">
+                    <FormLabel>Display Name</FormLabel>
+                    <Input
+                      type="displayname"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                  </FormControl>
                   <FormControl id="email">
                     <FormLabel>Email</FormLabel>
                     <Input
@@ -104,18 +89,16 @@ const Login: NextPage = () => {
                     />
                   </FormControl>
                   <FormControl id="password">
-                    <Flex justifyContent={"space-between"}>
-
-                      <FormLabel>Password</FormLabel>
-
-                      <Link color={'blue.500'}>Forgot password?</Link>
-                    </Flex>
+                    <FormLabel>Password</FormLabel>
                     <Input
                       type="password"
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
                   </FormControl>
+                  <Text>
+                    Passwords must contain at least eight characters, including at least 1 letter and 1 number.
+                  </Text>
                   <Stack spacing={6}>
                     <Stack
                       direction={{ base: "column", sm: "row" }}
@@ -126,7 +109,7 @@ const Login: NextPage = () => {
                     <Stack>
                       <Flex flex={1} justify={"space-between"}>
                         <Button colorScheme={"blue"} type="submit" width={"100%"}>
-                          Log in
+                          Sign up
                         </Button>
                       </Flex>
                     </Stack>
@@ -136,9 +119,9 @@ const Login: NextPage = () => {
             )}
           </Formik>
           <Text align="center">
-            Don’t have an account? <Link color="blue" textDecor="underline" onClick={() =>
-              Router.push(Routes.Additional.Register.route)
-            }>Sign up</Link>
+            Already have an account? <Link color="blue" textDecor="underline" onClick={() =>
+              Router.push(Routes.Additional.Login.route)
+            }>Log in</Link>
           </Text>
           <Text align="center">Are you an employer? <Link color="blue" textDecor="underline">Sign up on Talent</Link>  </Text>
         </Stack>
@@ -147,4 +130,5 @@ const Login: NextPage = () => {
   );
 }
 
-export default Login
+export default Register;
+

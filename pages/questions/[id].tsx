@@ -1,6 +1,7 @@
 import QuestionHeader from "@app/components/questionDetail/questionHeader";
 import type { NextPage } from "next";
 import { Grid, GridItem } from "@chakra-ui/react";
+import QuestionBody from "@app/components/questionDetail/questionBody";
 
 const QuestionDetail: NextPage = () => {
   return <>
@@ -10,7 +11,9 @@ const QuestionDetail: NextPage = () => {
       templateColumns='repeat(3, 1fr)'
       gap={4}
     >
-      <GridItem colSpan={2} bg='tomato' />
+      <GridItem colSpan={2} >
+        <QuestionBody />
+      </GridItem>
       <GridItem colSpan={1} bg='papayawhip' />
     </Grid>
   </>;

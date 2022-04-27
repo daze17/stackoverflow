@@ -52,7 +52,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
       </Drawer> */}
             {/* mobilenav */}
             {/* <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} /> */}
-            <Box ml={{ base: 0, md: "164px" }} p="24px" >
+            <Box ml={{ base: 0, md: "164px" }} p="24px" minH={"100vh"}>
                 {children}
             </Box>
         </Box>
