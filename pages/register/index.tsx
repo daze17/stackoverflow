@@ -30,7 +30,6 @@ const Register: NextPage = () => {
   });
 
   const onSubmit = (values: any) => {
-    console.log(values, "ayo bitches");
     registerMutation({
       variables: {
         input: {

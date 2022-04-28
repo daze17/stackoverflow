@@ -24,7 +24,6 @@ const QuestionAsk: NextPage = () => {
         onError: (error) => console.log(error, 'login failed'),
     });
     const onSubmit = (values: any) => {
-        console.log(values, 'values')
         const { title, questionBody, tags } = values
         askQuestion({
             variables: {
