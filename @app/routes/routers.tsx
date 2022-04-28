@@ -28,16 +28,6 @@ const AdditionalRoutes: RouteProps = {
     fallback: "/",
     title: "About",
   },
-  Products: {
-    route: "/products",
-    fallback: "/",
-    title: "Products",
-  },
-  ForTeams: {
-    route: "/forteams",
-    fallback: "/",
-    title: "For teams",
-  },
   Login: {
     route: "/login",
     fallback: "/",
@@ -53,6 +43,7 @@ const AdditionalRoutes: RouteProps = {
 
 const MainRoutes: RouteProps = {
   Home: { route: "/", fallback: "/", title: "Home" },
+  AccountDetail: {route: "/account" , fallback: "/", title: "Account Detail"},
   Questions: { route: "/questions", fallback: "/", title: "Questions list" },
   QuestionsDetail: { route: "/questions/[id]", fallback: "/questions", title: "Questions Detail" },
   Tags: { route: "/tags", fallback: "/", title: "Tags" },

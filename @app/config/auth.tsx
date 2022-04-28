@@ -1,10 +1,9 @@
 import Routes from "@app/routes/routers";
-// import { ME, CURRENT_PATIENT } from '@app/middleware/utils/gql';
 import Router from "next/router";
 import cookie from "cookie";
 import Cookies from "js-cookie";
 import config from "@app/config";
-import { get, isEmpty } from "lodash";
+import { get } from "lodash";
 import { CreateApolloClient } from "@app/config/apollo";
 import { gql } from "apollo-boost";
 
@@ -72,7 +71,7 @@ const auth = async ({ ctx, route, req, res, apolloClient }: any) => {
       return {};
     }
   }
-  if (route === "/questions/ask") {
+  if (route === "/questions/ask" || route === "/account") {
     redirect(res, Routes.Additional.Login.route);
   }
   return { user };

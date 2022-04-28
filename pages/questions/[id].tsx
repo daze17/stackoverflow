@@ -9,7 +9,7 @@ const QuestionDetails = () => {
   const router = useRouter()
   const questionId: any = router?.query?.id
   const { data: question, loading } = useQuery(gql`
-    query QUESTION_DETAIL($input: questionDetailInput) {
+    query QUESTION_DETAIL($input: QuestionDetailInput) {
       questionDetail(input: $input) {
         title
         tags
@@ -31,12 +31,11 @@ const QuestionDetails = () => {
   return !loading && <>
     <QuestionHeader data={question?.questionDetail} />
     <Grid
-      h='200px'
       templateColumns='repeat(3, 1fr)'
       gap={4}
     >
       <GridItem colSpan={2} >
-          <QuestionBody data={question?.questionDetail} />
+        <QuestionBody questionData={question?.questionDetail} />
       </GridItem>
       <GridItem colSpan={1}  >
         <Box boxShadow='md'>

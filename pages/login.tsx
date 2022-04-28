@@ -1,34 +1,25 @@
 import type { NextPage } from "next";
-import { useState } from "react";
 import {
   Button,
-  Checkbox,
   Flex,
   FormControl,
   FormLabel,
-  Heading,
   Input,
   Link,
   Stack,
-  Image,
   Text,
-  useToast,
   Box
 } from "@chakra-ui/react";
 import Routes from "@app/routes/routers";
 import Router from "next/router";
 import { Formik, Form } from "formik";
 import { useMutation, useApolloClient } from "@apollo/react-hooks";
-// import { LOGIN } from "@app/components/login/utils/gql";
-import crypto from "crypto-js";
 import Cookies from "js-cookie";
 import config from "@app/config";
 import { gql } from "apollo-boost";
-// import { showError, showSuccess } from "@app/config/errorHandler";
 
 const Login: NextPage = () => {
   const apolloClient = useApolloClient();
-  const toast = useToast();
   // Mutations
   const [loginMutation] = useMutation(gql`mutation LOGIN($input: LoginInput) {
     login(input: $input){
@@ -53,7 +44,6 @@ const Login: NextPage = () => {
         window.location.reload();
       } catch (error) {
         console.log(error);
-        // showError(Errors.System.INTERNAL_SERVER_ERROR);
       }
     },
     onError: (error) => console.log(error, 'login failed'),

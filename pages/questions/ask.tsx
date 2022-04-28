@@ -1,14 +1,13 @@
 import type { NextPage } from "next";
-import { Heading, Text, Box, Flex, Button, Input, Textarea, Grid, GridItem, Stack, FormControl } from "@chakra-ui/react";
+import { Heading, Text, Box, Button, Input, Textarea, Grid, GridItem, FormControl } from "@chakra-ui/react";
 import Routes from "@app/routes/routers";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import { Formik, Form } from "formik";
-import { useMutation, useApolloClient } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
 
 const QuestionAsk: NextPage = () => {
-
     const [askQuestion] = useMutation(gql`mutation ASK_QUESTION($input: QuestionInput) {
         addQuestion(input: $input){
             questionId

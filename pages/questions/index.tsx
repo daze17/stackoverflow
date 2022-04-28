@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { Heading, Text, Box, Flex, Button, Stack, Grid, GridItem, Link } from "@chakra-ui/react";
 import Routes from "@app/routes/routers";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import moment from "moment"
@@ -9,7 +9,7 @@ import moment from "moment"
 
 const Questions: NextPage = () => {
 
-  const { data: questionList, loading } = useQuery(gql`
+  const { data: questionList, loading, refetch } = useQuery(gql`
     query QUESTION_LIST {
       questions {
         id
@@ -25,6 +25,7 @@ const Questions: NextPage = () => {
       }
     }
   `);
+  refetch()
   return <Box>
     <Flex justifyContent={"space-between"}>
       <Heading fontSize={"1.7rem"} fontWeight={"normal"} mb={"8px"}>
@@ -76,7 +77,7 @@ const Questions: NextPage = () => {
                   {question?.title}
                 </Heading>
               </Link>
-              <Text isTruncated>
+              <Text >
                 {question?.questionBody}
               </Text>
               <Flex justifyContent={"space-between"} w="100%">

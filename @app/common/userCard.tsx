@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Image, Badge, Flex, Stack, Text } from "@chakra-ui/react"
+import { Box, Image, Flex, Text } from "@chakra-ui/react"
 
 const UserCard = (user: any) => {
     return (

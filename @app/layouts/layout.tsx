@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import Navbar from "@app/common/navbar";
-import Head from "next/head";
 import { Stack, Box, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Routes from "@app/routes/routers"

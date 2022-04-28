@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-
 import {
     Box,
     Container,
@@ -8,7 +7,6 @@ import {
     Stack,
     Text,
 } from '@chakra-ui/react';
-
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
     return (
@@ -31,7 +29,7 @@ export default function Footer() {
                     spacing={8}>
                     <Stack spacing={6}>
                         <Text fontSize={'sm'}>
-                            © 2022 Chakra Templates. All rights reserved
+                            © 2022 All rights reserved
                         </Text>
                     </Stack>
                     <Stack align={'flex-start'}>

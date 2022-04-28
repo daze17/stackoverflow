@@ -1,18 +1,13 @@
 import type { NextPage } from "next";
-import { useState } from "react";
 import {
   Button,
-  Checkbox,
   Flex,
   FormControl,
   FormLabel,
-  Heading,
   Input,
   Link,
   Stack,
-  Image,
   Text,
-  useToast,
   Box
 } from "@chakra-ui/react";
 import Routes from "@app/routes/routers";
@@ -30,7 +25,6 @@ const Register: NextPage = () => {
     fetchPolicy: "no-cache",
     onCompleted: async () => {
       Router.push(Routes.Additional.Login.route);
-      // showSuccess("Registered successfully", toast);
     },
     onError: (error) => console.log(error, 'error'),
   });

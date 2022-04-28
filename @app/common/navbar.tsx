@@ -6,21 +6,31 @@ import {
   Button,
   Stack,
   Collapse,
-  Icon,
   Link,
   useColorModeValue,
   useDisclosure,
   Image,
   Input,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Routes from "@app/routes/routers";
 import Router from "next/router";
+import { useApolloClient } from "@apollo/react-hooks";
 import { useUserContext } from "@app/config/userProvider";
+import config from "@app/config";
+import Cookies from "js-cookie";
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
   const { user }: any = useUserContext()
+  const apolloClient = useApolloClient();
+
+  const logout = () => {
+    Cookies.remove(config.TOKEN_KEY);
+    apolloClient.cache.reset().then(() => {
+      setTimeout(() => window.location.reload(), 500);
+    });
+  };
   return (
     <Box>
       <Flex
@@ -37,6 +47,7 @@ export default function Navbar() {
         position={"fixed"}
         w={"100%"}
         justify={"center"}
+        boxShadow='md'
       >
         <Flex w={"1264px"}>
           <Flex
@@ -46,6 +57,7 @@ export default function Navbar() {
           >
             <IconButton
               onClick={onToggle}
+
               icon={
                 isOpen ? (
                   <CloseIcon w={3} h={3} />
@@ -67,6 +79,7 @@ export default function Navbar() {
               bg={"none"}
               _hover={{ bg: "none" }}
               _active={{ bg: "none" }}
+              w={150}
             >
               <Image src="stackoverflow.png" w={150} alt="stackoverflowmenu" />
             </Button>
@@ -118,11 +131,32 @@ export default function Navbar() {
                 Sign Up
               </Button>
             </> : <>
-              <Button>
-                profile
+              <Button
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"sm"}
+                fontWeight={600}
+                color={"#ffffff"}
+                bg={"#0a95ff"}
+                border={"1px solid #7aa7c7"}
+                onClick={() => Router.push(Routes.Main.AccountDetail.route)}
+                _hover={{
+                  bg: "#0074cc",
+                }}>
+                Account Detail
               </Button>
-              <Button>
-                logout
+              <Button
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"sm"}
+                fontWeight={600}
+                color={"#ffffff"}
+                bg={"#0a95ff"}
+                border={"1px solid #7aa7c7"}
+                onClick={logout}
+                _hover={{
+                  bg: "#0074cc",
+                }}
+              >
+                Log Out
               </Button>
             </>}
           </Stack>

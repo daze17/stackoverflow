@@ -1,16 +1,9 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
-    IconButton,
     Box,
-    CloseButton,
     Flex,
     Icon,
-    useColorModeValue,
     Link,
-    Drawer,
-    DrawerContent,
-    Text,
-    useDisclosure,
     BoxProps,
     FlexProps,
 } from '@chakra-ui/react';
@@ -47,8 +40,7 @@ const LeftSideBar = ({ onClose, ...rest }: SidebarProps) => {
     return (
         <Box
             fontSize={"13px"}
-            borderRight="1px"
-            borderRightColor={useColorModeValue('gray.200', 'gray.700')}
+
             w={{ base: 'full', md: 60 }}
             pos="fixed"
             h="full"

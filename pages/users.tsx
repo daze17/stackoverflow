@@ -1,8 +1,6 @@
 
 import type { NextPage } from "next";
-import { Heading, Text, Box, Flex, Button, Input, Grid, GridItem } from "@chakra-ui/react";
-import Routes from "@app/routes/routers";
-import Router, { useRouter } from "next/router";
+import { Heading, Box, Flex, Grid, GridItem } from "@chakra-ui/react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import UserCard from "@app/common/userCard";
@@ -28,7 +26,7 @@ const Users: NextPage = () => {
         Users
       </Heading >
     </Flex>
-    <Input w={"200px"} placeholder={"Filter by user"} marginTop={"20px"} marginBottom={"20px"} />
+    {/* <Input w={"200px"} placeholder={"Filter by user"} marginTop={"20px"} marginBottom={"20px"} /> */}
     <Grid h='200px'
       templateColumns='repeat(4, 1fr)'
       gap={"50px"}>

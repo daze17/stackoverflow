@@ -5,9 +5,7 @@ export const UserContext = React.createContext({});
 export const UserProvider = ({ user, children }: any) => {
     return (
         <UserContext.Provider
-            value={{
-                user,
-            }}
+            value={{ user }}
         >
             {children}
         </UserContext.Provider>

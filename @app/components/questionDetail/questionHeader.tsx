@@ -1,11 +1,10 @@
 import React from 'react'
-import { chakra, Box, Button, Flex, Heading, Stack, Text } from '@chakra-ui/react'
+import { chakra, Box, Button, Flex, Heading, Text } from '@chakra-ui/react'
 import Routes from "@app/routes/routers";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import moment from 'moment';
 
 const QuestionHeader = ({ data }: any) => {
-    console.log(data, 'data')
     return (
         <Box w={"100%"}>
             <Flex justifyContent={"space-between"}>
