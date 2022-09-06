@@ -6,9 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: ["main"]
+    branches: [ "main" ]
   pull_request:
-    branches: ["main"]
+    branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -27,9 +27,15 @@ jobs:
       # - uses: actions/checkout@v3
       - name: Deploy next js app
         uses: appleboy/ssh-action@master
-        with:
+        with: 
           host: ${{secrets.SSH_HOST}}
           key: ${{secrets.SSH_KEY}}
           username: ${{ secrets.SSH_USERNAME }}
 
-          run: echo Yay!!!
+          run: |
+            cd /home/projects/stackoverflow
+            git pull origin main
+            yarn install
+            yarn build
+            pm2 restart 4
+            echo Yay!!!
