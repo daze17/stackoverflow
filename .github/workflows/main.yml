@@ -18,6 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
+    name: Build
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -25,8 +26,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       # - uses: actions/checkout@v3
       - name: Deploy next js app
-        uses: actions/checkout@v3
-        # uses: appleboy/ssh-action@v0.1.2
+        uses: appleboy/ssh-action@master
         with: 
           host: ${{secrets.SSH_HOST}}
           key: ${{secrets.SSH_KEY}}
