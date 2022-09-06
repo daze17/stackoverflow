@@ -32,6 +32,10 @@ jobs:
           key: ${{secrets.SSH_KEY}}
           username: ${{ secrets.SSH_USERNAME }}
 
-          script: |
+          run: |
             cd /home/projects/stackoverflow
+            git pull origin main
+            yarn install
+            yarn build
+            pm2 restart 4
             echo Yay!!!
